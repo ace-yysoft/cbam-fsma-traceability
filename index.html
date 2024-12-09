@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBAM Scope 3 공급망 탄소배출 계산기</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CBAM Scope 3 공급망 탄소배출 계산기</h1>
+        
+        <div class="calculator">
+            <!-- 상류 공급망 (Upstream) -->
+            <div class="section">
+                <h2>상류 공급망 (Upstream)</h2>
+                <div class="input-group">
+                    <label for="rawMaterials">원재료 구매량 (톤)</label>
+                    <select id="rawMaterialType">
+                        <option value="grain">곡물류</option>
+                        <option value="vegetable">채소류</option>
+                        <option value="fruit">과일류</option>
+                        <option value="meat">육류</option>
+                    </select>
+                    <input type="number" id="rawMaterials" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="packaging">포장재 구매량 (톤)</label>
+                    <select id="packagingType">
+                        <option value="plastic">플라스틱</option>
+                        <option value="paper">종이</option>
+                        <option value="glass">유리</option>
+                        <option value="metal">금속</option>
+                    </select>
+                    <input type="number" id="packaging" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="upstreamTransport">상류 운송 거리 (km)</label>
+                    <select id="transportType">
+                        <option value="road">도로</option>
+                        <option value="rail">철도</option>
+                        <option value="sea">해상</option>
+                        <option value="air">항공</option>
+                    </select>
+                    <input type="number" id="upstreamTransport" min="0">
+                </div>
+            </div>
+
+            <!-- 생산 공정 (Production) -->
+            <div class="section">
+                <h2>생산 공정 (Production)</h2>
+                <div class="input-group">
+                    <label for="electricity">전기 사용량 (kWh)</label>
+                    <select id="electricitySource">
+                        <option value="grid">일반 전력망</option>
+                        <option value="renewable">재생에너지</option>
+                    </select>
+                    <input type="number" id="electricity" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="water">용수 사용량 (톤)</label>
+                    <input type="number" id="water" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="waste">폐기물 발생량 (톤)</label>
+                    <select id="wasteType">
+                        <option value="landfill">매립</option>
+                        <option value="recycle">재활용</option>
+                        <option value="incineration">소각</option>
+                    </select>
+                    <input type="number" id="waste" min="0">
+                </div>
+            </div>
+
+            <!-- 하류 공급망 (Downstream) -->
+            <div class="section">
+                <h2>하류 공급망 (Downstream)</h2>
+                <div class="input-group">
+                    <label for="distribution">유통 거리 (km)</label>
+                    <select id="distributionType">
+                        <option value="local">국내 유통</option>
+                        <option value="export">수출</option>
+                    </select>
+                    <input type="number" id="distribution" min="0">
+                </div>
+                <div class="input-group">
+                    <label for="storage">저장 기간 (일)</label>
+                    <select id="storageType">
+                        <option value="ambient">상온</option>
+                        <option value="chilled">냉장</option>
+                        <option value="frozen">냉동</option>
+                    </select>
+                    <input type="number" id="storage" min="0">
+                </div>
+            </div>
+
+            <button onclick="calculateCBAMFootprint()">탄소배출량 계산</button>
+
+            <div class="result" id="result">
+                <h2>총 공급망 탄소배출량</h2>
+                <p id="footprint">0 kg CO₂e</p>
+                <div id="breakdown" class="breakdown"></div>
+                <div id="chart" class="chart"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
+   
